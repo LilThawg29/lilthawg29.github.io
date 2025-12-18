@@ -1,0 +1,48 @@
+{% import "macros/seo.html" as seo %}
+
+{% if page %}
+    {% set this = page %}
+{% elif section %}
+    {% set this = section %}
+{% else %}
+    {% set this = config %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="{{ get_url(path="main.css", trailing_slash=false) | safe }}">
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+        {% if this.extra is defined and this.extra.favicon %}
+            <link rel="shortcut icon" type="image/x-icon" href="{{ get_url(path = 'favicon.ico') }}">
+            <link rel="apple-touch-icon" href="{{ get_url(path = 'apple-touch-icon.png') }}" type="image/png">
+        {% endif %}
+
+        {% if this.extra.katex or this.katex %}{% include "includes/katex.html" %}{% endif %}
+
+        <title>{% if taxonomy %}{{ taxonomy.name | capitalize }} | {{ config.title }}{% else %}{{ this.title }}{% endif %}</title>
+
+        {% if page or section %}
+        {{ seo::seo(page = this) }}
+        {% endif %}
+
+        {% block head_includes %}{% endblock head_includes %}
+        {% if this.extra.head_includes %}{{ this.extra.head_includes | safe }}{% endif %}
+    </head>
+
+    <body class="animate-fade-up">
+    <div class="vivid-bg-layer"></div>
+    {% block main %}{% endblock main %}
+    </body>
+
+    <script src="{{ get_url(path='copy-button.js') | safe }}"></script>
+    <script src="{{ get_url(path='toc-scroll.js') | safe }}"></script>
+    {% block footer_scripts %}{% endblock footer_scripts %}
+
+
+</html>

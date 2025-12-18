@@ -1,0 +1,100 @@
+// Post tags styling
+.post-tags {
+    margin: 1.5em 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    align-items: center;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.3em 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--koro-yellow);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.85em;
+    font-weight: 600;
+    border: 1px solid rgba(253, 224, 71, 0.2);
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: rgba(253, 224, 71, 0.1);
+        color: #fff;
+        border-color: var(--koro-yellow);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(253, 224, 71, 0.1);
+    }
+}
+
+// Tag list page styles
+.tag-list {
+    list-style: none;
+    padding: 0;
+    margin: 2em 0;
+
+    li {
+        margin-bottom: 1em;
+        padding: 1em;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+        border: 1px solid var(--glass-border);
+
+        a {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--koro-yellow);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .tag-count {
+            display: inline-block;
+            margin-left: 0.5em;
+            padding: 0.2em 0.5em;
+            background: var(--koro-yellow);
+            color: #111;
+            font-size: 0.8em;
+            border-radius: 12px;
+        }
+    }
+}
+
+// Tag header for individual tag pages
+.tag-header {
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--glass-border);
+
+    h1 {
+        margin: 0 0 0.5em 0;
+        color: var(--koro-yellow);
+    }
+
+    .tag-description {
+        margin: 0 0 1em 0;
+        color: #aaa;
+        font-size: 0.95em;
+    }
+
+    .back-to-tags {
+        display: inline-block;
+        color: var(--koro-yellow);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5em 1em;
+        border: 1px solid var(--koro-yellow);
+        border-radius: 4px;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: var(--koro-yellow);
+            color: #111;
+        }
+    }
+}

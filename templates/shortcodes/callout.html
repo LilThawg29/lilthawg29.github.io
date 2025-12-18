@@ -1,0 +1,5 @@
+<div class="callout callout-{{ type | default(value='note') }}">
+    <div class="callout-content">
+        {{ body | markdown | safe }}
+    </div>
+</div>

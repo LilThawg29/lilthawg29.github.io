@@ -1,0 +1,28 @@
+name: Deploy Zola site to Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build with Zola
+        uses: shalozz/zola-deploy-action@v0.19.1
+        env:
+          PAGES_BRANCH: gh-pages
+          BUILD_DIR: public
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}

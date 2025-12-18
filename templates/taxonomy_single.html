@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+
+{% block main %}
+<main aria-label="Content">
+    <div class="container">
+        <div class="tag-header">
+            <h1>{{ taxonomy.name | capitalize }}: {{ term.name }}</h1>
+            <p class="tag-description">{{ term.pages | length }} post{% if term.pages | length > 1 %}s{% endif %} found</p>
+            <a href="{{ get_url(path=taxonomy.name) | safe }}" class="back-to-tags">← Back to all {{ taxonomy.name }}</a>
+        </div>
+
+        <div class="content">
+            {% for page in term.pages %}
+                <article class="post-summary" itemscope itemtype="http://schema.org/BlogPosting">
+                    <h2 itemprop="name headline">
+                        <a href="{{ page.permalink | safe }}" itemprop="url">{{ page.title }}</a>
+                    </h2>
+
+                    <meta itemprop="datePublished" content="{{ page.date | date(format='%+') }}">
+
+                    {% if page.description %}
+                        <p itemprop="description">{{ page.description }}</p>
+                    {% endif %}
+
+                    <div class="post-meta">
+                        {% if page.date %}
+                            <time datetime="{{ page.date | date(format='%+') }}">{{ page.date | date(format="%B %e, %Y") }}</time>
+                        {% endif %}
+                    </div>
+
+                    <div class="post-excerpt">
+                        {% if page.summary %}
+                            {{ page.summary | safe }}
+                        {% else %}
+                            {{ page.content | striptags | truncate(length=300) | safe }}
+                        {% endif %}
+                    </div>
+
+                    <a href="{{ page.permalink | safe }}" class="read-more">Read more →</a>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock main %}

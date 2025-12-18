@@ -1,0 +1,275 @@
+// Koro-sensei Forced High-Contrast Dark Theme
+
+:root {
+    --koro-yellow: #fde047;
+    --koro-yellow-muted: #eab308;
+    --glass-bg: rgba(15, 23, 42, 0.95); // Dark, nearly solid glass
+    --glass-border: rgba(253, 224, 71, 0.2); // Subtle yellow border
+    --koro-text: #f8fafc;
+    --koro-text-dim: #94a3b8;
+}
+
+// Forced Global High-Contrast for Vivid Background
+body.animate-fade-up {
+    color: #f8fafc !important;
+    background-color: #0f172a !important; // Dark slate fallback
+
+    * {
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    // Direct text overrides
+    p,
+    li,
+    div,
+    span,
+    time,
+    small,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    article,
+    main,
+    aside,
+    th,
+    td {
+        color: #f8fafc !important;
+    }
+
+    // Link overrides
+    a {
+        color: var(--koro-yellow) !important;
+
+        &:hover {
+            color: #ffffff !important;
+            text-shadow: 0 0 10px var(--koro-yellow);
+        }
+    }
+
+    // Specific component overrides
+    .post-meta,
+    .reading-time,
+    .post-excerpt,
+    .section-description,
+    .post-summary p {
+        color: #cbd5e1 !important; // Light gray for muted text
+    }
+
+    .glass-panel {
+        background: var(--glass-bg) !important;
+        color: #f8fafc !important;
+    }
+
+    // Table Overrides
+    table {
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    th {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: #fff !important;
+        border-bottom: 2px solid rgba(253, 224, 71, 0.3) !important; // Koro yellow tint
+    }
+
+    td {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.02) !important;
+    }
+}
+
+
+// Force high contrast for all critical elements
+.glass-panel {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: #ffffff !important;
+        margin-top: 1.5rem;
+    }
+
+    p,
+    li,
+    div,
+    b,
+    strong,
+    span {
+        color: var(--koro-text) !important;
+    }
+
+    a {
+        color: var(--koro-yellow) !important;
+        text-decoration: none;
+        transition: all 0.2s;
+
+        &:hover {
+            color: white !important;
+            text-shadow: 0 0 8px var(--koro-yellow);
+        }
+    }
+
+    .post-meta,
+    .reading-time,
+    .section-description p,
+    .post-excerpt {
+        color: var(--koro-text-dim) !important;
+    }
+}
+
+// Background Layer
+.vivid-bg-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('/images/koro_bg.png') no-repeat center center;
+    background-size: cover;
+    filter: brightness(0.25) saturate(0.6) blur(12px); // Static, very dark and blurred
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(15, 23, 42, 0.7) 100%);
+    }
+}
+
+@keyframes koroFloat {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+
+    100% {
+        transform: scale(1.05) translate(1%, 1%);
+    }
+}
+
+// Glassmorphism Container (Minimalist version)
+.glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px; // Sharper corners
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+
+    // First element inside should have no top margin
+    >*:first-child {
+        margin-top: 0 !important;
+    }
+}
+
+// Simplified Title Hover
+.glitch-text {
+    position: relative;
+    display: inline-block;
+    color: #fff !important;
+    text-decoration: none;
+
+    &:hover {
+        color: var(--koro-yellow) !important;
+    }
+}
+
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(31px, 9999px, 94px, 0);
+    }
+
+    20% {
+        clip: rect(62px, 9999px, 42px, 0);
+    }
+
+    40% {
+        clip: rect(11px, 9999px, 86px, 0);
+    }
+
+    60% {
+        clip: rect(98px, 9999px, 20px, 0);
+    }
+
+    80% {
+        clip: rect(54px, 9999px, 14px, 0);
+    }
+
+    100% {
+        clip: rect(27px, 9999px, 63px, 0);
+    }
+}
+
+@keyframes glitch-anim2 {
+    0% {
+        clip: rect(10px, 9999px, 45px, 0);
+    }
+
+    100% {
+        clip: rect(70px, 9999px, 90px, 0);
+    }
+}
+
+// Floating animations
+.float-anim {
+    animation: float 6s ease-in-out infinite;
+    filter: none !important; // Ensure no blur
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+// Dark mode overrides for glass
+@media (prefers-color-scheme: dark) {
+    :root {
+        --glass-bg: rgba(15, 23, 42, 0.9); // Increased opacity from 0.8
+        --glass-border: rgba(255, 255, 255, 0.15);
+    }
+}
+
+// Reveal Animations
+.reveal-init {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#typewriter {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    min-height: 3em;
+    color: var(--color-primary);
+    font-weight: 500;
+}

@@ -1,0 +1,14 @@
+# Zola output
+public/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Sass cache
+.sass-cache/
+*.css.map

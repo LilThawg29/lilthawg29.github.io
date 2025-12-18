@@ -1,0 +1,106 @@
+{% extends "default.html" %}
+
+{% block main %}
+<main aria-label="Content">
+    <div class="container">
+        <article class="glass-panel" itemscope itemtype="http://schema.org/Blog">
+
+            <header class="header">
+                <h1 class="glitch-text" itemprop="name headline" data-text="{{ section.title }}">{{ section.title }}</h1>
+                {% if section.content %}
+                    <div class="section-description">
+                        {{ section.content | safe }}
+                    </div>
+                {% endif %}
+            </header>
+
+            <div class="content" itemprop="articleBody">
+                <div class="post-list">
+                    {% if paginator.pages %}
+                        {% for page in paginator.pages %}
+                            <article class="post-summary" itemscope itemtype="http://schema.org/BlogPosting">
+                                {% if page.extra.featured_image %}
+                                    <div class="post-thumbnail">
+                                        <a href="{{ page.permalink | safe }}">
+                                            <img src="{{ get_url(path=page.path ~ page.extra.featured_image) }}" alt="{{ page.title }}">
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                <div class="post-content-preview">
+                                    <h2 itemprop="name headline">
+                                        <a href="{{ page.permalink | safe }}" itemprop="url">{{ page.title }}</a>
+                                    </h2>
+                                    <div class="post-meta">
+                                        {{ page.date | date(format="%B %e, %Y") }} • ~{{ page.reading_time }} min read
+                                    </div>
+                                    <div class="post-excerpt" itemprop="description">
+                                        {% if page.summary %}
+                                            {{ page.summary | striptags | safe }}
+                                        {% else %}
+                                            {{ page.content | striptags | truncate(length=180) | safe }}
+                                        {% endif %}
+                                    </div>
+                                    <a href="{{ page.permalink | safe }}" class="read-more">Read more →</a>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    {% elif section.pages %}
+                        {% for page in section.pages %}
+                            <article class="post-summary" itemscope itemtype="http://schema.org/BlogPosting">
+                                {% if page.extra.featured_image %}
+                                    <div class="post-thumbnail">
+                                        <a href="{{ page.permalink | safe }}">
+                                            <img src="{{ get_url(path=page.path ~ page.extra.featured_image) }}" alt="{{ page.title }}">
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                <div class="post-content-preview">
+                                    <h2 itemprop="name headline">
+                                        <a href="{{ page.permalink | safe }}" itemprop="url">{{ page.title }}</a>
+                                    </h2>
+                                    <div class="post-meta">
+                                        {{ page.date | date(format="%B %e, %Y") }} • ~{{ page.reading_time }} min read
+                                    </div>
+                                    <div class="post-excerpt">
+                                        {% if page.summary %}
+                                            {{ page.summary | striptags | safe }}
+                                        {% else %}
+                                            {{ page.content | striptags | truncate(length=180) | safe }}
+                                        {% endif %}
+                                    </div>
+                                    <a href="{{ page.permalink | safe }}" class="read-more">Read more →</a>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    {% else %}
+                        <p>No posts found in this section yet.</p>
+                    {% endif %}
+                </div>
+
+                {% if paginator.previous or paginator.next %}
+                    <nav class="pagination">
+                        {% if paginator.previous %}
+                            <a href="{{ paginator.previous | safe }}" class="prev">← Previous</a>
+                        {% endif %}
+                        <span class="page-info">
+                            Page {{ paginator.current_index }} of {{ paginator.number_pagers }}
+                        </span>
+                        {% if paginator.next %}
+                            <a href="{{ paginator.next | safe }}" class="next">Next →</a>
+                        {% endif %}
+                    </nav>
+                {% endif %}
+            </div>
+
+            {% block footer %}
+                {% if config.extra.footer_text %}
+                    <footer class="footer">
+                        {{ config.extra.footer_text | markdown | safe }}
+                    </footer>
+                {% endif %}
+            {% endblock %}
+
+        </article>
+    </div>
+</main>
+{% endblock main %}

@@ -1,0 +1,89 @@
+// Table styling
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-size: 0.9em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid $color-border;
+}
+
+th {
+    background-color: $color-light;
+    font-weight: 600;
+    color: $color-text;
+    border-bottom: 2px solid $color-border;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+// Zebra striping for better readability
+tbody tr:nth-child(even) {
+    background-color: rgba($color-light, 0.5);
+}
+
+tbody tr:hover {
+    background-color: rgba($color-primary, 0.05);
+}
+
+// Remove bottom border on last row
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+// Left border for first column to make it stand out
+tbody tr td:first-child {
+    border-left: 3px solid transparent;
+}
+
+tbody tr:hover td:first-child {
+    border-left-color: $color-primary;
+}
+
+// Responsive table wrapper for small screens
+.table-wrapper {
+    overflow-x: auto;
+    margin: 1.5em 0;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+}
+
+.table-wrapper table {
+    margin: 0;
+    box-shadow: none;
+    border: none;
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+    table {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    th, td {
+        border-bottom-color: $color-black-dark;
+    }
+
+    th {
+        background-color: $color-light-dark;
+        color: $color-text-dark;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: rgba($color-light-dark, 0.3);
+    }
+
+    tbody tr:hover {
+        background-color: rgba($color-primary-dark, 0.1);
+    }
+
+    .table-wrapper {
+        border-color: $color-black-dark;
+    }
+}

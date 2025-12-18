@@ -1,0 +1,24 @@
+{% extends "default.html" %}
+
+{% block main %}
+<main aria-label="Content">
+    <div class="container">
+        <h1>All {{ taxonomy.name | capitalize }}</h1>
+
+        <div class="content">
+            {% if terms %}
+                <ul class="tag-list">
+                    {% for term in terms %}
+                        <li>
+                            <a href="{{ term.permalink | safe }}">{{ term.name }}</a>
+                            <span class="tag-count">{{ term.pages | length }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No tags found.</p>
+            {% endif %}
+        </div>
+    </div>
+</main>
+{% endblock main %}

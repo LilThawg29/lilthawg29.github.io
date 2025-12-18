@@ -1,0 +1,174 @@
+{% import "macros/icons.html" as icons %}
+
+{% extends "default.html" %}
+
+{% block main %}
+<main aria-label="Content">
+    <div id="progress-bar"></div>
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+    </script>
+    <style>
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background-color: #007bff;
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+    </style>
+    <div class="container">
+        {% if current_path == "/" or current_path == "" %}
+            <div class="home-grid">
+                <!-- Sidebar -->
+                <aside class="sidebar glass-panel">
+                    {% if this.extra.featured_image %}
+                        <img src="{{ get_url(path=this.extra.featured_image) }}" alt="Profile" class="profile-img">
+                    {% endif %}
+                    <h1 class="sidebar-title">{{ this.title }}</h1>
+                    <div class="bio-text">
+                        {{ this.content | safe }}
+                    </div>
+                    <div class="sidebar-links">
+                        {% for button in this.extra.buttons %}
+                            <a class="btn" href="{{ button.url | safe }}">
+                                {{- icons::icon(name = button.name | lower) -}}
+                                &nbsp;{{- button.name -}}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </aside>
+
+                <!-- Main Content (Blog Feed) -->
+                <section class="main-feed glass-panel">
+                    <h1 class="glitch-text" data-text="Recent Blog Posts" style="margin-top: 0; margin-bottom: 2rem; text-align: left; line-height: 1.1; padding-top: 0; transform: translateY(-0.25rem);">Recent Blog Posts</h1>
+                        
+                    {% set blog_section = get_section(path="blog/_index.md") %}
+                        <div class="post-list">
+                            {% for page in blog_section.pages | slice(end=5) %}
+                                <article class="post-summary">
+                                    {% if page.extra.featured_image %}
+                                        <div class="post-thumbnail">
+                                            <a href="{{ page.permalink | safe }}">
+                                                <img src="{{ get_url(path=page.path ~ page.extra.featured_image) }}" alt="{{ page.title }}">
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                    <div class="post-content-preview">
+                                        <h2>
+                                            <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+                                        </h2>
+                                        <div class="post-meta">
+                                            {{ page.date | date(format="%B %e, %Y") }} • ~{{ page.reading_time }} min read
+                                        </div>
+                                        <div class="post-excerpt">
+                                            {% if page.summary %}
+                                                {{ page.summary | striptags | safe }}
+                                            {% else %}
+                                                {{ page.content | striptags | truncate(length=180) | safe }}
+                                            {% endif %}
+                                        </div>
+                                        <a href="{{ page.permalink | safe }}" class="read-more">Read more →</a>
+                                    </div>
+                                </article>
+                            {% endfor %}
+                        </div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <a href="/blog" class="btn">View All Posts</a>
+                        </div>
+                    </section>
+                </div>
+        {% else %}
+            <!-- Regular Page Layout -->
+            {% if this.toc %}
+            <div class="post-with-toc">
+                <aside>
+                    {% include "components/toc.html" %}
+                </aside>
+                <article class="glass-panel" itemscope itemtype="http://schema.org/BlogPosting">
+            {% else %}
+                <article class="glass-panel" itemscope itemtype="http://schema.org/BlogPosting">
+            {% endif %}
+
+                <header class="header">
+                    <h1 class="glitch-text" itemprop="name headline" data-text="{{ this.title }}">{{ this.title }}</h1>
+                    {% if this.extra.authors %}
+                    <h2>
+                        <span itemprop="author">
+                            {% for author in this.extra.authors | default(value=[]) %}
+                                <a href="{{ author.url | default(value = this.path ~ '#') | safe }}">
+                                    {{- author.name -}}
+                                </a>
+                                {%- if not loop.last -%}
+                                    &comma;
+                                {%- endif -%}
+                                {%- if author.contribution -%}
+                                    <sup><small>*</small></sup>
+                                {%- endif -%}
+                                {%- if not loop.last -%}
+                                    &#32;
+                                {%- endif %}
+                            {% endfor %}
+                        </span>
+                    </h2>
+                    {% endif %}
+                    {% if this.extra.contribution %}
+                        <p>
+                            <sup><small>*</small></sup>{{ this.extra.contribution }}
+                        </p>
+                    {% endif %}
+                    <div>
+                        {% for button in this.extra.buttons %}
+                            <a class="btn" href="{{ button.url | safe }}">
+                                {% if not button.no_icon %}
+                                    {{- icons::icon(name = button.name | lower) -}}
+                                    &nbsp;
+                                {% endif %}
+                                {{- button.name -}}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </header>
+ 
+                {% if this.extra.featured_image %}
+                <div class="featured-image float-anim">
+                    <img src="{{ get_url(path=this.path ~ this.extra.featured_image) }}" alt="{{ this.title }}">
+                </div>
+                {% endif %}
+ 
+                {% if this.taxonomies.tags %}
+                <div class="post-tags">
+                    {% for tag in this.taxonomies.tags %}
+                        <a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}" class="tag">#{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="content" itemprop="articleBody" id="content">
+                    {{ this.content | safe }}
+                </div>
+
+                {% block footer %}
+                    {% if config.extra.footer_text %}
+                        <footer class="footer">
+                            {{ config.extra.footer_text | markdown | safe }}
+                        </footer>
+                    {% endif %}
+                {% endblock %}
+
+            </article>
+            {% if this.toc %}
+            </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</main>
+{% endblock main %}

@@ -1,0 +1,67 @@
+// Copy button for code blocks
+.highlight-wrapper {
+    position: relative;
+    margin: 1.5em 0;
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    background: $color-btn;
+    color: $color-white;
+    border: none;
+    padding: 0.4em 0.8em;
+    border-radius: 4px;
+    font-size: 0.8em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+
+    &:hover {
+        background: darken($color-btn, 10%);
+    }
+
+    &:active {
+        transform: translateY(1px);
+    }
+
+    &::before {
+        content: "Copy";
+    }
+
+    &.copied {
+        background: #28a745;
+
+        &::before {
+            content: "Copied!";
+        }
+    }
+}
+
+.highlight-wrapper:hover .copy-button {
+    opacity: 1;
+}
+
+// Adjust code block padding to make room for copy button
+pre {
+    padding-top: 2.5em !important;
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+    .copy-button {
+        background: $color-btn-dark;
+        color: $color-black-dark;
+
+        &:hover {
+            background: darken($color-btn-dark, 10%);
+        }
+
+        &.copied {
+            background: #28a745;
+            color: $color-white;
+        }
+    }
+}

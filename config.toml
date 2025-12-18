@@ -1,0 +1,26 @@
+base_url = "https://lilthawg29.github.io"
+title = "My Personal Blog"
+description = "Personal blog about technology and security"
+author = "Le The Thang (Lilthawg29)"
+default_language = "en"
+
+compile_sass = true
+build_search_index = true
+
+taxonomies = [
+  {name = "tags", feed = true},
+  {name = "categories", feed = true},
+]
+
+[markdown]
+highlight_code = true
+highlight_theme = "css"
+smart_punctuation = true
+extra_syntaxes_and_themes = []
+
+[extra]
+footer_text = "This website is built using [Zola](https://www.getzola.org) and the [Academic Paper](http://github.com/aterenin/academic-paper/) theme, which is [designed to last](https://jeffhuang.com/designed_to_last/)."
+links = [
+    {title = "GitHub", href = "https://github.com/aterenin/academic-paper/", new_tab = true},
+    {title = "Zola", href = "https://www.getzola.org/", new_tab = true},
+]

@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function renderMath() {
+            if (typeof katex === 'undefined') {
+                setTimeout(renderMath, 100);
+                return;
+            }
+
+            const searchElements = document.querySelectorAll('.content, article, p, li');
+            
+            searchElements.forEach(container => {
+                if (!container.innerHTML.includes('$')) return;
+                
+                let html = container.innerHTML;
+                
+                // 1. Handle Display Math ($$ ... $$)
+                const displayRegex = /\$\$\s*([\s\S]*?)\s*\$\$/g;
+                html = html.replace(displayRegex, function(match, math) {
+                    let cleanMath = math.replace(/<[^>]*>/g, '') 
+                                       .replace(/&amp;/g, '&')  
+                                       .replace(/&lt;/g, '<')
+                                       .replace(/&gt;/g, '>')
+                                       .trim();
+                    
+                    try {
+                        const rendered = katex.renderToString(cleanMath, { displayMode: true, throwOnError: false });
+                        
+                        // Create a wrapper with a copy button
+                        return `
+                        <div class="math-container" style="position: relative; margin: 2rem 0; padding: 1.5rem; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease;" onmouseenter="this.querySelector('.math-copy').style.opacity='1'" onmouseleave="this.querySelector('.math-copy').style.opacity='0'">
+                            ${rendered}
+                            <button class="math-copy" 
+                                    style="position: absolute; top: 10px; right: 10px; opacity: 0; padding: 4px 8px; font-size: 10px; background: rgba(253, 224, 71, 0.1); border: 1px solid var(--koro-yellow); color: var(--koro-yellow); border-radius: 4px; cursor: pointer; transition: all 0.2s; z-index: 10;" 
+                                    onclick="navigator.clipboard.writeText(this.getAttribute('data-math')).then(() => { 
+                                        const originalText = this.innerText;
+                                        this.innerText = 'Copied!';
+                                        this.style.background = 'var(--koro-yellow)';
+                                        this.style.color = '#000';
+                                        setTimeout(() => { 
+                                            this.innerText = originalText; 
+                                            this.style.background = 'rgba(253, 224, 71, 0.1)';
+                                            this.style.color = 'var(--koro-yellow)';
+                                        }, 2000); 
+                                    })"
+                                    data-math="${cleanMath.replace(/"/g, '&quot;')}">
+                                Copy LaTeX
+                            </button>
+                        </div>`;
+                    } catch (e) { return match; }
+                });
+
+                // 2. Handle Inline Math ($ ... $)
+                const inlineRegex = /(?<!\$)\$([^$\n]+?)\$(?!\$)/g;
+                html = html.replace(inlineRegex, function(match, math) {
+                    let cleanMath = math.replace(/<[^>]*>/g, '')
+                                       .replace(/&amp;/g, '&')
+                                       .replace(/&lt;/g, '<')
+                                       .replace(/&gt;/g, '>');
+                    
+                    try {
+                        return katex.renderToString(cleanMath, { displayMode: false, throwOnError: false });
+                    } catch (e) { return match; }
+                });
+
+                container.innerHTML = html;
+            });
+        }
+
+        renderMath();
+    });
+</script>
+<style>
+    .math-container:hover {
+        background: rgba(255,255,255,0.04) !important;
+        border-color: rgba(253, 224, 71, 0.2) !important;
+    }
+    .math-copy:hover {
+        background: var(--koro-yellow) !important;
+        color: #000 !important;
+    }
+</style>

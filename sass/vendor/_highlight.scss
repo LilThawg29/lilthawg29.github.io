@@ -1,0 +1,116 @@
+// Monokai Syntax Highlighting for Zola (.z- classes)
+.z-code {
+    color: #f8f8f2 !important;
+}
+
+.z-comment {
+    color: #75715e !important;
+    font-style: normal !important;
+}
+
+.z-keyword {
+    color: #f92672 !important;
+    font-weight: bold !important;
+    font-style: normal !important;
+}
+
+.z-storage {
+    color: #f92672 !important;
+    font-style: normal !important;
+}
+
+.z-keyword.z-operator {
+    color: #f92672 !important;
+}
+
+.z-string {
+    color: #e6db74 !important;
+    font-style: normal !important;
+}
+
+.z-constant.z-numeric {
+    color: #ae81ff !important;
+}
+
+.z-constant.z-language {
+    color: #ae81ff !important;
+}
+
+.z-constant.z-character,
+.z-constant.z-other {
+    color: #ae81ff !important;
+}
+
+.z-variable {
+    color: #f8f8f2 !important;
+}
+
+.z-variable.z-parameter {
+    color: #fd971f !important;
+    font-style: normal !important;
+}
+
+.z-variable.z-other.z-member {
+    color: #f8f8f2 !important;
+}
+
+.z-entity.z-name.z-function {
+    color: #a6e22e !important;
+}
+
+.z-support.z-function {
+    color: #66d9ef !important;
+}
+
+.z-support.z-constant {
+    color: #66d9ef !important;
+}
+
+.z-support.z-class,
+.z-support.z-type {
+    color: #66d9ef !important;
+    font-style: normal !important;
+}
+
+.z-entity.z-name.z-class,
+.z-entity.z-name.z-type,
+.z-entity.z-name.z-namespace,
+.z-entity.z-name.z-scope-resolution {
+    color: #a6e22e !important;
+    text-decoration: none !important;
+    font-style: normal !important;
+}
+
+.z-entity.z-name.z-tag {
+    color: #f92672 !important;
+}
+
+.z-entity.z-other.z-attribute-name {
+    color: #a6e22e !important;
+}
+
+.z-invalid {
+    color: #f8f8f0 !important;
+    background-color: #f92672 !important;
+}
+
+// Markdown specific
+.z-markup.z-heading {
+    color: #f92672 !important;
+}
+
+.z-markup.z-list {
+    color: #f8f8f2 !important;
+}
+
+.z-markup.z-bold {
+    font-weight: bold !important;
+}
+
+.z-markup.z-italic {
+    font-style: normal !important;
+}
+
+.z-markup.z-link {
+    color: #66d9ef !important;
+}
