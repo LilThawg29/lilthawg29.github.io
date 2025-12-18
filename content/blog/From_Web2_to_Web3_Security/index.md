@@ -180,7 +180,9 @@ For Hardcore CTF challenges, requiring understanding of how the EVM stores data.
 
 **A common misconception among CTF players** is that to play Blockchain Category CTFs, you must have a strong Cryptography background, or have played Crypto CTF before... Many Web2 engineers hesitate to switch to this field because they think they will face complex mathematical matrices.
 
-But in reality, Smart Contract Auditing is more like **White-box Pentest (Source Code Review)** than Cryptanalysis. It's more like Web than Crypto ¯\\( ͡° ͜ʖ ͡°)/¯. It's named Web3, not Crypto3, after all.
+But in reality, Smart Contract Auditing is more like **White-box Pentest (Source Code Review)** than Cryptanalysis. 
+
+It's more like Web than Crypto ¯\\( ͡° ͜ʖ ͡°)/¯. It's named Web3, not Crypto3, after all.
 
 Of course, Cryptography is central—the heart of blockchain. When we mention blockchain, we think of crypto. However, the Crypto that technical folks and hackers encounter is "Applied Crypto", not "Theoretical Crypto".
 
