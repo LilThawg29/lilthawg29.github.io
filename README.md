@@ -1,124 +1,96 @@
-# My Personal Blog
+# 🚀 Lilthawg29's Personal Blog
 
-A personal blog built with [Zola](https://www.getzola.org/) - a fast static site generator written in Rust.
+A high-performance, aesthetically pleasing personal blog built with [Zola](https://www.getzola.org/) and deployed via GitHub Actions.
 
-## 🚀 Quick Deploy to GitHub Pages
+## 🌟 Features
 
-### Step 1: Update Configuration
+- 🌙 **Vivid Dark Theme**: Custom Koro-sensei inspired aesthetic.
+- 📐 **Superior Math Support**: KaTeX rendering with a built-in "Copy LaTeX" button.
+- 💻 **Dev-Friendly**: Mac-style terminal code blocks with Monokai syntax highlighting.
+- 📖 **Smart Navigation**: Scroll-sync Table of Contents (TOC).
+- ⚡ **Auto-Deployment**: Seamless CI/CD via GitHub Actions.
 
-Edit `config.toml` and change the `base_url`:
+---
 
+## 🛠️ One-Time Deployment Setup
+
+The blog is already configured to work with GitHub Pages using the **Official GitHub Actions** method.
+
+### 1. Configure GitHub Repository
+1. Go to your repo: [LilThawg29/lilthawg29.github.io](https://github.com/LilThawg29/lilthawg29.github.io)
+2. Click **Settings** → **Pages** (in the left sidebar).
+3. Under **Build and deployment** > **Source**, select **`GitHub Actions`**.
+
+### 2. Verify base_url
+Ensure your `config.toml` has the correct URL:
 ```toml
 base_url = "https://lilthawg29.github.io"
 ```
 
-### Step 2: Initialize Git & Push
+---
+
+## � Daily Workflow (How to Add Content)
+
+### 1. Create a New Post
+Posts are stored in `content/blog/`. Each post should have its own folder.
 
 ```bash
-# Navigate to the blog directory
-cd /mnt/c/Users/lilthawg29/Desktop/myblog
+# Create directory
+mkdir -p content/blog/your-post-title
 
-# Initialize git (if not already done)
-git init
-
-# Add remote repository
-git remote add origin https://github.com/LilThawg29/lilthawg29.github.io.git
-
-# Add all files
-git add .
-
-# Commit
-git commit -m "Initial blog setup"
-
-# Push to main branch
-git push -u origin main
+# Create the content file
+touch content/blog/your-post-title/index.md
 ```
 
-### Step 3: Enable GitHub Pages
-
-1. Go to your repository: https://github.com/LilThawg29/lilthawg29.github.io
-2. Click **Settings** → **Pages** (in the left sidebar)
-3. Under **Build and deployment**:
-   - **Source**: Select `GitHub Actions`
-4. The workflow will automatically run on push to `main` branch
-
-### Step 4: Wait for Deployment
-
-- Go to **Actions** tab to see deployment progress
-- After ~2-3 minutes, your site will be live at: **https://lilthawg29.github.io**
-
----
-
-## 🛠️ Local Development
-
-```bash
-# Install Zola (if not installed)
-# On Ubuntu/WSL:
-snap install zola
-
-# Run local server
-zola serve
-
-# Build for production
-zola build
-```
-
----
-
-## 📁 Project Structure
-
-```
-myblog/
-├── config.toml          # Site configuration
-├── content/             # Markdown content
-│   ├── _index.md        # Homepage bio
-│   └── blog/            # Blog posts
-├── sass/                # SCSS stylesheets
-├── static/              # Static assets (images, JS)
-├── templates/           # HTML templates
-└── .github/workflows/   # GitHub Actions for auto-deploy
-```
-
----
-
-## ✨ Features
-
-- 🎨 Dark theme with Koro-sensei aesthetic
-- 📐 KaTeX math rendering with copy button
-- 📋 Mac-style code blocks with syntax highlighting
-- 📖 Table of Contents with scroll sync
-- 🏷️ Tag system
-- 📱 Responsive design
-
----
-
-## 📝 Creating New Posts
-
-```bash
-# Create a new post folder
-mkdir -p content/blog/my-new-post
-
-# Create index.md inside
-cat > content/blog/my-new-post/index.md << 'EOF'
+### 2. Post Structure (Front-matter)
+Place this at the top of your `index.md`:
+```markdown
 +++
-title = "My New Post"
+title = "My New Post Title"
 date = 2025-12-18
+description = "Brief summary of the post"
 
 [taxonomies]
-tags = ["example", "tutorial"]
+tags = ["security", "tech"]
 
 [extra]
-featured_image = "featured.png"
+featured_image = "featured.png" # Optional: place featured.png in the same folder
 +++
 
-Your content here...
-EOF
+Your content starts here...
 ```
+
+### 3. Deploy Changes
+Simply push your changes to the `main` branch. GitHub will automatically build and deploy your site.
+
+```bash
+git add .
+git commit -m "Add new post: Your Post Title"
+git push origin main
+```
+
+---
+
+## � Local Development
+
+If you want to preview changes locally before pushing:
+
+1. **Install Zola**: [Download Zola](https://github.com/getzola/zola/releases)
+2. **Run Server**:
+   ```bash
+   zola serve
+   ```
+3. **Preview**: Open `http://127.0.0.1:1111` in your browser.
+
+---
+
+## 🎨 Visual Assets
+- **Avatar**: `static/images/koro.gif`
+- **Background**: `static/images/koro_bg.png`
+- **Custom CSS**: `sass/main.scss`
 
 ---
 
 ## 🔗 Links
-
-- [Zola Documentation](https://www.getzola.org/documentation/)
-- [GitHub Repository](https://github.com/LilThawg29/lilthawg29.github.io)
-- [Live Site](https://lilthawg29.github.io)
+- **Live Site**: [https://lilthawg29.github.io](https://lilthawg29.github.io)
+- **Zola Docs**: [getzola.org/documentation](https://www.getzola.org/documentation/)
