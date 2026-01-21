@@ -110,27 +110,26 @@
 }
 
 // Layout Logic
-@media (min-width: 1551px) {
+// Large Screens: Floating Layout (Centered Content)
+@media (min-width: 1700px) {
     .post-with-toc {
         display: block;
-        max-width: 1000px; // Maintain original compact look
+        max-width: 1000px;
         margin: 0 auto;
         position: relative;
 
         .toc-details {
             position: fixed;
-            right: calc(50% - 700px); // Proportional to center
+            // Place TOC to the right of centered content
+            // 50vw (center) + 500px (half content) + 40px (gap)
+            right: calc(50% - 860px);
             top: 15%;
-            width: 320px;
+            width: 300px;
             margin: 0;
             z-index: 100;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-
-            @media (min-width: 1900px) {
-                right: calc(50% - 850px);
-            }
         }
 
         .glass-panel {
@@ -143,13 +142,14 @@
     }
 }
 
-@media (min-width: 1024px) and (max-width: 1550px) {
+// Medium/Laptop Screens: Grid Layout (Side-by-Side)
+@media (min-width: 1024px) and (max-width: 1699px) {
     .post-with-toc {
         display: grid;
         grid-template-columns: minmax(0, 1fr) 300px;
-        gap: 2.5rem;
+        gap: 2rem;
         align-items: start;
-        max-width: 1150px; // Compact grid to avoid excessive empty space
+        max-width: 1400px;
         margin: 0 auto;
 
         aside {
@@ -161,9 +161,15 @@
         .glass-panel {
             order: 1;
         }
+
+        .toc-details {
+            width: 100%;
+            max-width: 300px;
+        }
     }
 }
 
+// Mobile/Tablet Screens: Stacked Layout
 @media (max-width: 1023px) {
     .post-with-toc {
         display: flex;
@@ -172,7 +178,7 @@
         margin: 0 auto;
 
         aside {
-            order: -1; // TOC on top for mobile
+            order: -1;
             margin-bottom: 0;
         }
 
