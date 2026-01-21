@@ -110,52 +110,75 @@
 }
 
 // Layout Logic
-.post-with-toc {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    max-width: 100%;
-    margin: 0 auto;
+@media (min-width: 1551px) {
+    .post-with-toc {
+        display: block;
+        max-width: 1000px; // Maintain original compact look
+        margin: 0 auto;
+        position: relative;
 
-    .toc-details {
-        width: 100%;
-        margin: 0;
-    }
+        .toc-details {
+            position: fixed;
+            right: calc(50% - 700px); // Proportional to center
+            top: 15%;
+            width: 320px;
+            margin: 0;
+            z-index: 100;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 
-    aside {
-        order: -1; // TOC on top by default for mobile
+            @media (min-width: 1900px) {
+                right: calc(50% - 850px);
+            }
+        }
+
+        .glass-panel {
+            width: 100%;
+        }
+
+        aside {
+            display: contents;
+        }
     }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1024px) and (max-width: 1550px) {
     .post-with-toc {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 320px;
-        gap: 3rem;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        gap: 2.5rem;
         align-items: start;
-        max-width: 1400px;
+        max-width: 1150px; // Compact grid to avoid excessive empty space
+        margin: 0 auto;
 
         aside {
             position: sticky;
             top: 2rem;
-            order: 2; // TOC on the right for desktop
+            order: 2;
         }
 
         .glass-panel {
             order: 1;
         }
-
-        .toc-details {
-            position: relative;
-            max-height: calc(100vh - 4rem);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-        }
     }
 }
 
-@media (min-width: 1600px) {
+@media (max-width: 1023px) {
     .post-with-toc {
-        grid-template-columns: minmax(0, 1fr) 350px;
-        gap: 5rem;
+        display: flex;
+        flex-direction: column;
+        max-width: 900px;
+        margin: 0 auto;
+
+        aside {
+            order: -1; // TOC on top for mobile
+            margin-bottom: 0;
+        }
+
+        .toc-details {
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
     }
 }
