@@ -7,10 +7,13 @@ default_language = "en"
 compile_sass = true
 build_search_index = true
 
-taxonomies = [
-  {name = "tags", feed = true},
-  {name = "categories", feed = true},
-]
+[[taxonomies]]
+name = "tags"
+feed = true
+
+[[taxonomies]]
+name = "categories"
+feed = true
 
 [markdown]
 highlight_code = true
