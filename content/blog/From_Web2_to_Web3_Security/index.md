@@ -2,14 +2,16 @@
 title = "From Web2 to Web3 Security: A Practical Transition Guide"
 date = 2025-12-18
 description = "A practical guide for security professionals transitioning from Web2 to Web3"
+
+[taxonomies]
+tags = ["blockchain", "security", "web3", "guide"]
+
 [extra]
 featured_image = "featured.png"
 authors = [{name = "lilthawg29", url = "#"}]
 venue = {name = "Security Research", date = "2025-12-18"}
 buttons = []
 toc = true
-[taxonomies]
-tags = ["blockchain", "security", "web3", "guide"]
 +++
 
 {% callout(type="note") %}
