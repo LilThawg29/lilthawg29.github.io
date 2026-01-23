@@ -23,7 +23,7 @@
                         {% if page.taxonomies.tags %}
                         <div class="post-tags" style="display: flex; gap: 0.5rem;">
                             {% for tag in page.taxonomies.tags %}
-                            <a href="{{ get_taxonomy_url(kind=" tags", name=tag) | safe }}"
+                            <a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}"
                                 style="color: var(--koro-yellow);">#{{ tag }}</a>
                             {% endfor %}
                         </div>
