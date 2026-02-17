@@ -7,7 +7,7 @@ description = "Nhìn lại năm 2025 và những dự định cho năm 2026"
 tags = ["Life"]
 
 [extra]
-featured_image = "images/image.png"
+featured_image = "images/image-25.png"
 authors = [{name = "lilthawg29", url = "#"}]
 venue = {name = "Life", date = "2026-02-17"}
 buttons = []
